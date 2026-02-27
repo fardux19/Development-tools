@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Геолокация</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 Определение местоположения по IP</h1>
+        
+        <!-- Блок загрузки -->
+        <div id="loading" class="loading hidden">Загрузка данных</div>
+        
+        <!-- Блок ошибки -->
+        <div id="error" class="error hidden"></div>
+        
+        <!-- Блок с информацией -->
+        <div id="info" class="info hidden">
+            <p><span class="label">IP-адрес:</span> <span id="ip" class="value">—</span></p>
+            <p><span class="label">Страна:</span> <span id="country" class="value">—</span></p>
+            <p><span class="label">Регион:</span> <span id="region" class="value">—</span></p>
+            <p><span class="label">Город:</span> <span id="city" class="value">—</span></p>
+        </div>
+        
+        <!-- Кнопка обновления -->
+        <button id="refreshBtn" onclick="getLocationData()">Получить данные</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
