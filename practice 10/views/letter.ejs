@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎄 Твоё письмо Деду Морозу 🎄</h1>
+        
+        <div class="letter">
+            <p>✨ <strong>Дорогой Дедушка Мороз!</strong></p>
+            
+            <p>Пишет тебе <strong><%= letter.name %></strong>.</p>
+            <p>Мне <strong><%= letter.age %></strong> лет. Я весь год вёл себя хорошо и слушался родителей.</p>
+            
+            <p>В этом году я очень хочу попросить у тебя:</p>
+            <p style="font-size: 1.4em; color: #c41e3a; text-align: center; margin: 30px 0;">
+                "<%= letter.wish %>"
+            </p>
+            
+            <p>Обещаю быть послушным и в следующем году!</p>
+            
+            <div class="signature">
+                С любовью, <strong><%= letter.name %></strong>
+            </div>
+            
+            <div class="date">
+                <%= letter.date %>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="/letter" class="btn">Написать ещё письмо ✍️</a>
+        </div>
+        
+        <p style="text-align: center; margin-top: 30px; color: #666;">
+            Твоё письмо уже летит в Великий Устюг! ✨
+        </p>
+    </div>
+
+    <!-- Новогодний снегопад -->
+    <script>
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄️';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 7 + 's';
+            snowflake.style.fontSize = Math.random() * 20 + 10 + 'px';
+            document.body.appendChild(snowflake);
+            
+            setTimeout(() => {
+                snowflake.remove();
+            }, 10000);
+        }
+        
+        setInterval(createSnowflake, 300);
+    </script>
+</body>
+</html>
