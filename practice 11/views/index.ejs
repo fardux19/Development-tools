@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор QR-кодов</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📱 Генератор QR-кодов</h1>
+        
+        <div class="form-container">
+            <form action="/generate" method="POST" id="qrForm">
+                <!-- Поле для текста/URL -->
+                <div class="form-group">
+                    <label for="text">Введите текст или URL:</label>
+                    <input 
+                        type="text" 
+                        id="text" 
+                        name="text" 
+                        value="<%= text %>"
+                        placeholder="Например: https://example.com или Привет, мир!"
+                        required
+                    >
+                </div>
+                
+                <!-- Настройки цвета -->
+                <div class="color-settings">
+                    <div class="form-group color-group">
+                        <label for="darkColor">Цвет QR-кода:</label>
+                        <input 
+                            type="color" 
+                            id="darkColor" 
+                            name="darkColor" 
+                            value="<%= darkColor %>"
+                        >
+                    </div>
+                    
+                    <div class="form-group color-group">
+                        <label for="lightColor">Цвет фона:</label>
+                        <input 
+                            type="color" 
+                            id="lightColor" 
+                            name="lightColor" 
+                            value="<%= lightColor %>"
+                        >
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn">Сгенерировать QR-код</button>
+            </form>
+        </div>
+        
+        <!-- Отображение ошибки -->
+        <% if (locals.error) { %>
+            <div class="error-message">
+                ⚠️ <%= error %>
+            </div>
+        <% } %>
+        
+        <!-- Отображение QR-кода -->
+        <% if (locals.qrcode) { %>
+            <div class="result-container">
+                <h2>Ваш QR-код готов!</h2>
+                <div class="qr-code">
+                    <img src="<%= qrcode %>" alt="QR Code">
+                </div>
+                
+                <div class="qr-actions">
+                    <a href="<%= qrcode %>" download="qrcode.png" class="btn btn-secondary">
+                        Скачать PNG
+                    </a>
+                    <button onclick="window.print()" class="btn btn-secondary">
+                        🖨️ Печать
+                    </button>
+                </div>
+                
+                <div class="qr-info">
+                    <p><strong>Содержимое:</strong> <%= text %></p>
+                </div>
+            </div>
+        <% } %>
+        
+        <!-- Инструкция -->
+        <div class="instructions">
+            <h3>Как пользоваться:</h3>
+            <ol>
+                <li>Введите текст или URL в поле выше</li>
+                <li>Выберите цвета QR-кода (по желанию)</li>
+                <li>Нажмите "Сгенерировать QR-код"</li>
+                <li>Скачайте или распечатайте готовый QR-код</li>
+            </ol>
+        </div>
+    </div>
+    
+    <!-- Простая валидация на клиенте -->
+    <script>
+        document.getElementById('qrForm').addEventListener('submit', function(e) {
+            const textInput = document.getElementById('text');
+            if (!textInput.value.trim()) {
+                e.preventDefault();
+                alert('Пожалуйста, введите текст или URL');
+            }
+        });
+    </script>
+</body>
+</html>
